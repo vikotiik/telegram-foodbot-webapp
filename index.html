@@ -1,11 +1,86 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Мой Telegram WebApp</title>
-  </head>
-  <body>
-    <h1>Привет, это мой Web App!</h1>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Дневник питания</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    form {
+      max-width: 500px;
+      margin: auto;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    .range-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .submit-btn {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Новая запись</h1>
+  <form>
+    <label for="meal">Что вы съели?</label>
+    <textarea id="meal" name="meal" rows="3" required></textarea>
+
+    <label for="reasons">Причины приёма пищи</label>
+    <select id="reasons" name="reasons" multiple required>
+      <option value="голод">Голод</option>
+      <option value="по привычке">По привычке</option>
+      <option value="стресс">Стресс</option>
+      <option value="за компанию">За компанию</option>
+      <option value="усталость">Усталость</option>
+      <option value="радость">Радость</option>
+    </select>
+
+    <label for="hungerBefore">Голод до (1–10)</label>
+    <div class="range-wrapper">
+      <input type="range" id="hungerBefore" name="hungerBefore" min="1" max="10" />
+      <span id="valueBefore">5</span>
+    </div>
+
+    <label for="hungerAfter">Голод после (1–10)</label>
+    <div class="range-wrapper">
+      <input type="range" id="hungerAfter" name="hungerAfter" min="1" max="10" />
+      <span id="valueAfter">5</span>
+    </div>
+
+    <label for="comment">Комментарий (необязательно)</label>
+    <textarea id="comment" name="comment" rows="2"></textarea>
+
+    <button type="submit" class="submit-btn">Сохранить запись</button>
+  </form>
+
+  <script>
+    const hungerBefore = document.getElementById('hungerBefore');
+    const valueBefore = document.getElementById('valueBefore');
+    hungerBefore.addEventListener('input', () => {
+      valueBefore.textContent = hungerBefore.value;
+    });
+
+    const hungerAfter = document.getElementById('hungerAfter');
+    const valueAfter = document.getElementById('valueAfter');
+    hungerAfter.addEventListener('input', () => {
+      valueAfter.textContent = hungerAfter.value;
+    });
+  </script>
+</body>
 </html>
